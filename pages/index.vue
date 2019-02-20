@@ -5,8 +5,12 @@
       <h1 class="title">nuxt-fundamentals</h1>
       <h2 class="subtitle">My swell Nuxt.js project</h2>
       <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
+        <nuxt-link
+          v-for="post in posts"
+          :to="{name: 'posts-id', params: {id: post.id}}"
+          :key="post.id"
+          class="button--grey"
+        >{{post.title}}</nuxt-link>
       </div>
     </div>
   </section>
@@ -18,6 +22,11 @@ import Logo from "~/components/Logo.vue";
 export default {
   components: {
     Logo
+  },
+  computed: {
+    posts() {
+      return this.$store.state.posts.all;
+    }
   }
 };
 </script>
